@@ -10,8 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 import os
-import environ
 
+import environ
 env = environ.Env(
     DEBUG=(bool, False)
 )
@@ -46,8 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'environ',
     'graphene_django',
-    'apps.users'
+    'apps.users',
+    'apps.nba'
 ]
 
 MIDDLEWARE = [
