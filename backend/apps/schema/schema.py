@@ -2,7 +2,8 @@ from graphene_django import DjangoObjectType
 import graphene
 
 from apps.users.models import User as UserModel
-from apps.nba.models import NBA as NBAModel
+from apps.nba.models import Team as TeamModel
+# from apps.nba.models import Team,Player,Standings,SeasonStats,TeamSeasonStats,PlayerCareerStats,PlayerSeasonStats
 ## USER QUERY
 class User(DjangoObjectType):
     class Meta:
@@ -14,15 +15,15 @@ class Query(graphene.ObjectType):
     def resolve_users(self, info):
         return UserModel.objects.all()
 ## NBA QUERY
-class NBA(DjangoObjectType):
+class Team(DjangoObjectType):
     class Meta:
-        model = NBAModel
+        model = TeamModel
 
 class Query(graphene.ObjectType):
-    nba = graphene.List(NBA)
+    nba = graphene.List(Team)
 
     def resolve_nba(self, info):
-        return NBAModel.objects.all()
+        return TeamModel.objects.all()
 
 
 schema = graphene.Schema(query=Query)

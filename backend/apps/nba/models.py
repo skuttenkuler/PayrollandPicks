@@ -8,13 +8,12 @@ from django.urls import reverse
 SEASONS = [('REGULAR', 'Regular'), ('POST', 'Post')]
 
 class Team(models.Model):
-    team_id = models.IntegerField(primary_key=True),
+    team_id = models.AutoField(primary_key=True),
     team_name = models.CharField(max_length=50)
     team_logo = models.CharField(max_length=50)
     team_division = models.CharField(max_length=50)
-    team_conference = models.CharField(max_length=50)
     team_city = models.CharField(max_length=50)
-
+    
     def __str__(self) -> str:
         """ 
         readable presentation
