@@ -46,10 +46,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'environ',
-    'graphene_django',
     'apps.users',
-    'apps.nba'
+    'apps.nba',
+    'environ',
+    'graphene_django'
 ]
 
 MIDDLEWARE = [

@@ -1,4 +1,3 @@
-from __future__ import annotations
 from datetime import datetime
 from typing import Dict, List
 from django.core.validators import MaxValueValidator
@@ -36,41 +35,41 @@ class Team(models.Model):
 """
 NBA TEAM STANDINGS
 """
-class Standings(models.Model):
-    """
-    Individual Team
-    """
-    team = models.OneToOneField(Team, on_delete=models.CASCADE, related_name='standing')
-    wins = models.IntegerField()
-    losses = models.IntegerField()
-    home_record = models.CharField(max_length=5)
-    away_record = models.CharField(max_length=5)
-    win_percentage = models.FloatField()
+# class Standings(models.Model):
+#     """
+#     Individual Team
+#     """
+#     team = models.OneToOneField(Team, on_delete=models.CASCADE, related_name='standing')
+#     wins = models.IntegerField()
+#     losses = models.IntegerField()
+#     home_record = models.CharField(max_length=5)
+#     away_record = models.CharField(max_length=5)
+#     win_percentage = models.FloatField()
     
-    @property
-    def seed(self) -> int:
-        """
-        return seed of current team
-        """
-        conference_teams = Standings.objects.filter(team_team_conference = self.team.team_conference)
-        return list(conference_teams).index(self)+1
-    def get_wins_losses(self) -> str:
-        """
-        return team win/loss record
-        """
-        return f'{self.wins}-{self.losses}'
+#     @property
+#     def seed(self) -> int:
+#         """
+#         return seed of current team
+#         """
+#         conference_teams = Standings.objects.filter(team_team_conference = self.team.team_conference)
+#         return list(conference_teams).index(self)+1
+#     def get_wins_losses(self) -> str:
+#         """
+#         return team win/loss record
+#         """
+#         return f'{self.wins}-{self.losses}'
 
-    class Meta:
-        """
-        Standing Ordering
-        """
-        ordering = ['-win_percentage', '-wins', '-home_record', '-away_record']
+#     class Meta:
+#         """
+#         Standing Ordering
+#         """
+#         ordering = ['-win_percentage', '-wins', '-home_record', '-away_record']
 
-        def __str__(self) -> str:
-            """
-            readable presentation
-            """
-            return f'{self.team.get_team_name()} {self.get_wins_losses()}'
+#         def __str__(self) -> str:
+#             """
+#             readable presentation
+#             """
+#             return f'{self.team.get_team_name()} {self.get_wins_losses()}'
        
 
 """
@@ -109,21 +108,21 @@ class Player(models.Model):
     #def get_player_photo_url(self) -> str:
     #    return str(location.render(player_id=self.player_id)
 
-    def get_latest_player_stats(self) -> PlayerSeasonStats:
-        """
-        get latest player stats
-        """
-        try:
-            return self.season_stats.get(
-                season_type='Regular',
-                season='2019-2020'
-            )
-        except PlayerSeasonStats.MultipleObjectsReturned:
-                return self.season_stats.get(
-                    season_type='Regular',
-                    season='2019-2020',
-                    current_team__team_id = 0
-            )
+    # def get_latest_player_stats(self) -> PlayerSeasonStats:
+    #     """
+    #     get latest player stats
+    #     """
+    #     try:
+    #         return self.season_stats.get(
+    #             season_type='Regular',
+    #             season='2019-2020'
+    #         )
+    #     except PlayerSeasonStats.MultipleObjectsReturned:
+    #             return self.season_stats.get(
+    #                 season_type='Regular',
+    #                 season='2019-2020',
+    #                 current_team__team_id = 0
+    #         )
     
     def get_absolute_url(self) -> str:
         """
@@ -144,84 +143,84 @@ class Player(models.Model):
 """
 NBA SEASON STATS
 """
-class SeasonStats(models.Model):
-    minutes = models.FloatField()
-    points = models.FloatField()
-    offense_rebounds = models.FloatField()
-    defense_rebounds = models.FloatField()
-    rebounds = models.FloatField()
-    assists = models.FloatField()
-    steals = models.FloatField()
-    blocks = models.FloatField()
-    turnovers = models.FloatField()
-    fouls = models.FloatField()
-    field_goal_made = models.FloatField()
-    field_goal_attempt = models.FloatField()
-    field_goal_percent = models.FloatField(validators=[MaxValueValidator(1)])
-    field_goal3_made = models.FloatField()
-    field_goal3_attempt = models.FloatField()
-    field_goal3_percent = models.FloatField(validators=[MaxValueValidator(1)])
-    free_throw_made = models.FloatField()
-    free_throw_attempt = models.FloatField()
-    free_throw_percent = models.FloatField(validators=[MaxValueValidator(1)])
-    season_type = models.CharField(max_length=7, choices=SEASONS)
+# class SeasonStats(models.Model):
+#     minutes = models.FloatField()
+#     points = models.FloatField()
+#     offense_rebounds = models.FloatField()
+#     defense_rebounds = models.FloatField()
+#     rebounds = models.FloatField()
+#     assists = models.FloatField()
+#     steals = models.FloatField()
+#     blocks = models.FloatField()
+#     turnovers = models.FloatField()
+#     fouls = models.FloatField()
+#     field_goal_made = models.FloatField()
+#     field_goal_attempt = models.FloatField()
+#     field_goal_percent = models.FloatField(validators=[MaxValueValidator(1)])
+#     field_goal3_made = models.FloatField()
+#     field_goal3_attempt = models.FloatField()
+#     field_goal3_percent = models.FloatField(validators=[MaxValueValidator(1)])
+#     free_throw_made = models.FloatField()
+#     free_throw_attempt = models.FloatField()
+#     free_throw_percent = models.FloatField(validators=[MaxValueValidator(1)])
+#     season_type = models.CharField(max_length=7, choices=SEASONS)
 
-    class Meta:
-        abstract:True
+#     class Meta:
+#         abstract:True
 
-"""
-NBA TEAM STATS
-"""
-class TeamSeasonStats(models.Model):
-    season = models.CharField(max_length=15)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='season_stats')
-    wins = models.IntegerField()
-    losses = models.IntegerField()
-    win_percentage = models.FloatField()
+# """
+# NBA TEAM STATS
+# """
+# class TeamSeasonStats(models.Model):
+#     season = models.CharField(max_length=15)
+#     team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='season_stats')
+#     wins = models.IntegerField()
+#     losses = models.IntegerField()
+#     win_percentage = models.FloatField()
 
-    class Meta:
-        db_table = 'team_season_stats'
+#     class Meta:
+#         db_table = 'team_season_stats'
     
-    def __str__(self) -> str:
-        """
-        readable presentation
-        """
-        return self.team.get_team_name()
-"""
-NBA PLAYER CAREER STATS
-"""
-class PlayerCareerStats(models.Model):
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_career_stats')
-    games_played = models.IntegerField()
-    games_started = models.IntegerField()
+#     def __str__(self) -> str:
+#         """
+#         readable presentation
+#         """
+#         return self.team.get_team_name()
+# """
+# NBA PLAYER CAREER STATS
+# """
+# class PlayerCareerStats(models.Model):
+#     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_career_stats')
+#     games_played = models.IntegerField()
+#     games_started = models.IntegerField()
 
-    class Meta:
-        db_table = 'player_career_stats'
+#     class Meta:
+#         db_table = 'player_career_stats'
     
-    def __str__(self) -> str:
-        """
-        readable presentaion
-        """
-        return self.player.get_player_full_name
-"""
-NBA PLAYER SEASON STATS
-"""
-class PlayerSeasonStats(models.Model):
-    player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_season_stats')
-    current_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='+')
-    season = models.CharField(max_length=15)
-    games_played = models.IntegerField(validators=[MaxValueValidator(82)])
-    games_started = models.IntegerField(validators=[MaxValueValidator(82)])
+#     def __str__(self) -> str:
+#         """
+#         readable presentaion
+#         """
+#         return self.player.get_player_full_name
+# """
+# NBA PLAYER SEASON STATS
+# """
+# class PlayerSeasonStats(models.Model):
+#     player = models.ForeignKey(Player, on_delete=models.CASCADE, related_name='player_season_stats')
+#     current_team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='+')
+#     season = models.CharField(max_length=15)
+#     games_played = models.IntegerField(validators=[MaxValueValidator(82)])
+#     games_started = models.IntegerField(validators=[MaxValueValidator(82)])
 
-    class Meta:
-        db_table = 'player_season_stats'
-        ordering = ['-season']
+#     class Meta:
+#         db_table = 'player_season_stats'
+#         ordering = ['-season']
     
-    def __str__(self) -> str:
-        """
-        readable presentaion
-        """
-        return self.player.get_player_full_name()
+#     def __str__(self) -> str:
+#         """
+#         readable presentaion
+#         """
+#         return self.player.get_player_full_name()
         
 
 
