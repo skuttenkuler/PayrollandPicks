@@ -21,9 +21,11 @@ class Team(DjangoObjectType):
 
 class Query(graphene.ObjectType):
     nba = graphene.List(Team)
+    team_by_name = graphene.Field(Team, team_name=graphene.String())
 
     def resolve_nba(self, info):
         return TeamModel.objects.all()
+    
 
 
 schema = graphene.Schema(query=Query)

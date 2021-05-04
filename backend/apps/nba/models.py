@@ -9,9 +9,14 @@ SEASONS = [('REGULAR', 'Regular'), ('POST', 'Post')]
 class Team(models.Model):
     team_id = models.AutoField(primary_key=True),
     team_name = models.CharField(max_length=50)
-    team_logo = models.CharField(max_length=50)
+    team_logo = models.URLField()
     team_division = models.CharField(max_length=50)
     team_city = models.CharField(max_length=50)
+    active_roster_cap = models.IntegerField(null=True)
+    dead_cap = models.IntegerField(null=True)
+    cap_hold = models.IntegerField(null=True)
+    total_cap = models.IntegerField(null=True)
+    cap_max_space = models.IntegerField(null=True)
     
     def __str__(self) -> str:
         """ 
