@@ -28,7 +28,7 @@ interface ExportPageInput {
     optimizeFonts: boolean;
     optimizeImages: boolean;
     optimizeCss: any;
-    spanContext: any;
+    parentSpanId: any;
 }
 interface ExportPageResults {
     ampValidations: AmpValidation[];
@@ -46,8 +46,6 @@ interface RenderOpts {
     ampPath?: string;
     ampValidatorPath?: string;
     ampSkipValidation?: boolean;
-    hybridAmp?: boolean;
-    inAmpMode?: boolean;
     optimizeFonts?: boolean;
     optimizeImages?: boolean;
     optimizeCss?: any;
@@ -55,6 +53,7 @@ interface RenderOpts {
     locales?: string[];
     locale?: string;
     defaultLocale?: string;
+    trailingSlash?: boolean;
 }
-export default function exportPage({ spanContext, path, pathMap, distDir, outDir, pagesDataDir, renderOpts, buildExport, serverRuntimeConfig, subFolders, serverless, optimizeFonts, optimizeImages, optimizeCss, }: ExportPageInput): Promise<ExportPageResults>;
+export default function exportPage({ parentSpanId, path, pathMap, distDir, outDir, pagesDataDir, renderOpts, buildExport, serverRuntimeConfig, subFolders, serverless, optimizeFonts, optimizeImages, optimizeCss, }: ExportPageInput): Promise<ExportPageResults>;
 export {};

@@ -1,15 +1,15 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
-import Image from 'next/image'
+import Link from 'next/link'
+import Layout from '../components/Layout'
 
-export default function Home() {
-  return (
-    <div className={styles.home}>
-   
-      <div className={styles.container}>
-      
-          <h1 className={styles.header}>Payroll and Picks</h1>
-      </div>
-   </div>
-  )
-}
+const IndexPage = () => (
+  <Layout title="Home | Next.js + TypeScript Example">
+    <h1>Hello Next.js 👋</h1>
+    <p>
+      <Link href="/about">
+        <a>About</a>
+      </Link>
+    </p>
+  </Layout>
+)
+
+export default IndexPage
