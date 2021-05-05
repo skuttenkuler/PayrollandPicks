@@ -27,7 +27,10 @@ export default function Home() {
       <h1>Teams</h1>
       <div>
         {data.teams.map((team:any) => (
-          <div key={team.id}>{team.teamName}</div>
+          <div key={team.id}>
+            <h4>{team.teamCity}{team.teamName}</h4>
+            <img src={team.teamLogo} alt="logo"/>  
+          </div>
         ))}
       </div>
     </div>
