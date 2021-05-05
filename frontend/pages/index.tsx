@@ -1,15 +1,35 @@
-import Link from 'next/link'
-import Layout from '../components/Layout'
+import Head from 'next/head';
+import { useQuery } from '@apollo/client';
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </Layout>
-)
+import QUERY_TEAMS from '../queries/TeamQuery.graphql';
 
-export default IndexPage
+import styles from '../styles/Home.module.css';
+
+export default function Home() {
+  const { data, loading, error } = useQuery(QUERY_TEAMS);
+  // make sure all data is loaded
+  if (loading) {
+    return <p>loading...</p>;
+  }
+
+  // check for errors
+  if (error) {
+    return <p>:( an error happened</p>;
+  }
+
+  // if all good return data
+  return (
+    <div className={styles.container}>
+      <Head>
+        <title>TEAMS</title>
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
+      <h1>Teams</h1>
+      <div>
+        {data.teams.map((team:any) => (
+          <div key={team.id}>{team.teamName}</div>
+        ))}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,15 @@
+query {
+  teams{
+    id
+    teamName
+    teamLogo
+    teamDivision
+    teamCity
+    activeRosterCap
+    capHold
+    capMaxSpace
+    deadCap
+    totalCap
+    
+  }
+}

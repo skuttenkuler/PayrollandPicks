@@ -8,3 +8,15 @@ export type User = {
   id: number
   name: string
 }
+export type Team = {
+  id:number
+  teamName: string
+  teamLogo: string
+  teamDivision: string
+  teamCity: string
+  activeRosterCap:number
+  capHold:number
+  capMaxSpace:number
+  deadCap:number
+  totalCap: number
+}
