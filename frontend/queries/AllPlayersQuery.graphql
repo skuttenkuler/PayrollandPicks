@@ -1,0 +1,8 @@
+query {
+  players{
+    playerId
+    firstName
+    lastName
+    playerImage
+  }
+}

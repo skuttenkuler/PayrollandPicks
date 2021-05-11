@@ -7,7 +7,7 @@ from django.urls import reverse
 SEASONS = [('REGULAR', 'Regular'), ('POST', 'Post')]
 
 class Team(models.Model):
-    team_id = models.AutoField(primary_key=True),
+    team_id = models.AutoField(primary_key=True, default=None)
     team_name = models.CharField(max_length=50)
     team_logo = models.URLField()
     team_division = models.CharField(max_length=50)
@@ -81,38 +81,34 @@ NBA TEAM STANDINGS
 PLAYER MODEL
 """
 class Player(models.Model):
-    team = models.ForeignKey("Team",on_delete=models.CASCADE)
     player_id = models.AutoField(primary_key=True)
+    jersey_number = models.IntegerField()
+    player_image = models.URLField(null=True)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
-    dob = models.CharField(max_length=20)
-    jersey = models.IntegerField()
-    postition = models.CharField(max_length=20)
+    position = models.CharField(max_length=20)
     height = models.CharField(max_length=5)
     weight = models.IntegerField()
+    age = models.IntegerField(null=True)
+    team_name = models.ForeignKey("Team",on_delete=models.CASCADE)
     draft_year = models.CharField(max_length=20)
-    draft_round = models.CharField(max_length=20)
     draft_number = models.CharField(max_length=20)
+    country = models.CharField(max_length=50)
+    contract_year = models.IntegerField(null=True)
+    contract_amount = models.IntegerField(null=True)
+    average_salary = models.IntegerField(null=True)
     signed_using = models.CharField(max_length=50)
     base_salary = models.IntegerField(null=True)
     dead_cap = models.IntegerField(null=True)
     cap_figure = models.IntegerField(null=True)
     cap_percentage = models.FloatField(null=True)
     future_guranteed = models.IntegerField(null=True)
-
+    injury = models.CharField(max_length=20)
+    season_ending_injury = models.BooleanField(default=False)
      
     def get_player_full_name(self) ->str:
         return f'{self.first_name} {self.last_name}'
     
-    def get_player_age(self) -> int:
-        """
-        calculate player age
-        """
-        return datetime.today().year - datetime.strptime(self.dob, "%Y-%m-%d").year
-    
-    #def get_player_photo_url(self) -> str:
-    #    return str(location.render(player_id=self.player_id)
-
     # def get_latest_player_stats(self) -> PlayerSeasonStats:
     #     """
     #     get latest player stats
@@ -128,12 +124,6 @@ class Player(models.Model):
     #                 season='2019-2020',
     #                 current_team__team_id = 0
     #         )
-    
-    def get_absolute_url(self) -> str:
-        """
-        get url for individual player
-        """
-        return reverse("main:players", args=[self.player_id]) 
 
 
     class Meta:
