@@ -90,7 +90,7 @@ class Player(models.Model):
     height = models.CharField(max_length=5)
     weight = models.IntegerField()
     age = models.IntegerField(null=True)
-    team_name = models.ForeignKey("Team",on_delete=models.CASCADE)
+    team = models.ForeignKey("Team",on_delete=models.CASCADE)
     draft_year = models.CharField(max_length=20)
     draft_number = models.CharField(max_length=20)
     country = models.CharField(max_length=50)
