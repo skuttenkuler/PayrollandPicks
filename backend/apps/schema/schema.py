@@ -1,36 +1,54 @@
 from graphene_django import DjangoObjectType
 import graphene
 
-from apps.users.models import User as UserModel
-from apps.nba.models import Team as TeamModel, Player as PlayerModel
+from apps.users.models import User
+from apps.nba.models import Team, Player
 # from apps.nba.models import Team,Player,Standings,SeasonStats,TeamSeasonStats,PlayerCareerStats,PlayerSeasonStats
 #TYPES
-class User(DjangoObjectType):
+class UserType(DjangoObjectType):
     class Meta:
-        model = UserModel
+        model = User
 
-class Team(DjangoObjectType):
+class TeamType(DjangoObjectType):
     class Meta:
-        model = TeamModel
+        model = Team
 
-class Player(DjangoObjectType):
+class PlayerType(DjangoObjectType):
     class Meta:
-        model = PlayerModel
+        model = Player
 
 #QUERYS
 class Query(graphene.ObjectType):
-    users = graphene.List(User)
-    teams = graphene.List(Team)
-    players = graphene.List(Player)
+    users = graphene.List(UserType)
+    teams = graphene.List(TeamType)
+    players = graphene.List(PlayerType)
+    team = graphene.Field(TeamType, id=graphene.Int())
+    player = graphene.Field(PlayerType, id=graphene.Int())
 
-    def resolve_users(self, info):
-        return UserModel.objects.all()
+    def resolve_users(self, info, **kwargs):
+        return User.objects.all()
+
+    def resolve_player(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return Player.objects.get(pk=id)
+        
+        return None
+
+    def resolve_team(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return Team.objects.get(pk=id)
+        
+        return None
 
     def resolve_teams(self, info):
-        return TeamModel.objects.all()
+        return Team.objects.all()
     
     def resolve_players(self, info):
-        return PlayerModel.objects.all()
+        return Player.objects.all()
 
 
 schema = graphene.Schema(query=Query)
