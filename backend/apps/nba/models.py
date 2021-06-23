@@ -5,7 +5,6 @@ from django.db import models
 from django.urls import reverse
 
 SEASONS = [('REGULAR', 'Regular'), ('POST', 'Post')]
-
 class Team(models.Model):
     team_id = models.AutoField(primary_key=True, default=None)
     team_name = models.CharField(max_length=50)
@@ -36,47 +35,7 @@ class Team(models.Model):
     def get_absolute_url(self) -> str:
         return reverse("main:teams", args=[self.team_id])
     
-
-"""
-NBA TEAM STANDINGS
-"""
-# class Standings(models.Model):
-#     """
-#     Individual Team
-#     """
-#     team = models.OneToOneField(Team, on_delete=models.CASCADE, related_name='standing')
-#     wins = models.IntegerField()
-#     losses = models.IntegerField()
-#     home_record = models.CharField(max_length=5)
-#     away_record = models.CharField(max_length=5)
-#     win_percentage = models.FloatField()
-    
-#     @property
-#     def seed(self) -> int:
-#         """
-#         return seed of current team
-#         """
-#         conference_teams = Standings.objects.filter(team_team_conference = self.team.team_conference)
-#         return list(conference_teams).index(self)+1
-#     def get_wins_losses(self) -> str:
-#         """
-#         return team win/loss record
-#         """
-#         return f'{self.wins}-{self.losses}'
-
-#     class Meta:
-#         """
-#         Standing Ordering
-#         """
-#         ordering = ['-win_percentage', '-wins', '-home_record', '-away_record']
-
-#         def __str__(self) -> str:
-#             """
-#             readable presentation
-#             """
-#             return f'{self.team.get_team_name()} {self.get_wins_losses()}'
-       
-
+ 
 """
 PLAYER MODEL
 """
@@ -90,7 +49,7 @@ class Player(models.Model):
     height = models.CharField(max_length=5)
     weight = models.IntegerField()
     age = models.IntegerField(null=True)
-    team = models.ForeignKey("Team",on_delete=models.CASCADE)
+    player_team = models.ForeignKey(Team,on_delete=models.DO_NOTHING,default=False)
     draft_year = models.CharField(max_length=20)
     draft_number = models.CharField(max_length=20)
     country = models.CharField(max_length=50)
@@ -134,7 +93,9 @@ class Player(models.Model):
 
         def __str__(self) -> str:
             return self.get_player_full_name()
-       
+
+
+
 """
 NBA SEASON STATS
 """
