@@ -1,0 +1,7 @@
+query getSingleTeam($id: int){
+  team(id: $id) {
+    teamName
+    teamCity
+    teamId
+  }
+}
