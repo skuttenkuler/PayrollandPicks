@@ -1,15 +1,9 @@
-query {
+query getTeams {
   teams{
-    id
+    teamId
     teamName
-    teamLogo
-    teamDivision
     teamCity
-    activeRosterCap
-    capHold
-    capMaxSpace
-    deadCap
-    totalCap
-    
+    teamLogo
   }
 }
+
