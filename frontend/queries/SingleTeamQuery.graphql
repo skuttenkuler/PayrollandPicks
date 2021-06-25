@@ -1,7 +1,14 @@
-query getSingleTeam($id: int){
+query getSingleTeam($id: Int){
   team(id: $id) {
+    teamId
     teamName
     teamCity
-    teamId
+    teamLogo
+    totalCap
+    activeRosterCap
+    deadCap
+    capHold
+    capMaxSpace
+    teamDivision
   }
 }
