@@ -1,8 +1,8 @@
 import React from 'react';
 import {GetStaticPaths, GetStaticProps} from 'next'
 import Head from 'next/head';
-import { useQuery, gql } from '@apollo/client';
-import QUERY_TEAM from '../../../queries/SingleTeamQuery.graphql';
+import { useQuery } from '@apollo/client';
+import QUERY_SINGLE_TEAM from '../../../queries/SingleTeamQuery.graphql';
 import styles from '../../../styles/SingleTeam.module.css';
 
 //interface
@@ -25,22 +25,7 @@ interface TeamID {
     teamId:number
 }
 //query
-const Get_Team_Data = gql`
-    query getSingleTeam($id: Int){
-        team(id: $id) {
-            teamId
-            teamName
-            teamCity
-            teamLogo
-            totalCap
-            activeRosterCap
-            deadCap
-            capHold
-            capMaxSpace
-            teamDivision
-        }
-    }
-    `;
+const Get_Team_Data = QUERY_SINGLE_TEAM
 
 export default function SingleTeamData(context:any) {
 const { loading, data } = useQuery<TeamData, TeamID>(
