@@ -2,7 +2,7 @@ import { get } from 'lodash';
 import { getDataFromTree } from '@apollo/client/react/ssr'
 import withApollo from '../../lib/withApollo';
 import { GetPlayersQuery, useGetPlayersQuery  } from '../../generated';
-
+import Link from 'next/link'
 import styles from '../../styles/Players.module.css'
 function Players() {
   const { data } = useGetPlayersQuery();
@@ -18,7 +18,7 @@ function Players() {
       <table>
         {players.map((player:any) => (
           <div key={player.playerId}>
-            <h4>{player.firstName}{player.lastName}</h4>
+            <Link href="/players/[id]" as={`/players/${player.playerId}`}><h4>{player.firstName}{player.lastName}</h4></Link>
             <img src={player.playerImage} alt="logo"/>  
           </div>
         ))}
