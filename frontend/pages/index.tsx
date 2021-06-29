@@ -1,8 +1,9 @@
 import Head from 'next/head';
+import withApollo from '../lib/withApollo';
 import styles from '../styles/Home.module.css';
 import Navbar from '../components/NavBar';
 
-export default function Home() {
+function Home() {
   // if all good return data
   return (
     <div className={styles.container}>
@@ -15,3 +16,4 @@ export default function Home() {
     </div>
   );
 }
+export default withApollo(Home)

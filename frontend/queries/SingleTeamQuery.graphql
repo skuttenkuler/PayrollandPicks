@@ -1,4 +1,4 @@
-query getSingleTeam($id: Int){
+query getSingleTeam($id: ID!){
   team(id: $id) {
     teamId
     teamName

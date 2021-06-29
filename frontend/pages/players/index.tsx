@@ -1,11 +1,11 @@
 import Head from 'next/head';
 import { useQuery } from '@apollo/client';
-
-//import QUERY_TEAMS from '../queries/AllTeamsQuery.graphql';
+import { getDataFromTree } from '@apollo/client/react/ssr'
+import withApollo from '../../lib/withApollo';
 import QUERY_PLAYERS from '../../queries/AllPlayersQuery.graphql';
 import styles from '../../styles/Teams.module.css';
 
-export default function Home() {
+function Players() {
   const { data, loading, error } = useQuery(QUERY_PLAYERS);
   // make sure all data is loaded
   if (loading) {
@@ -24,7 +24,7 @@ export default function Home() {
         <title>Players</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <h1>Teams</h1>
+      <h1>Players</h1>
       <div>
         {data.players.map((player:any) => (
           <div key={player.playerId}>
@@ -36,3 +36,4 @@ export default function Home() {
     </div>
   );
 }
+export default withApollo(Players, {getDataFromTree})
