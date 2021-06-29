@@ -1,7 +1,0 @@
-query getSingleTeam($id: Int){
-  player(id: $id) {
-    firstName
-    lastName
-    playerId
-  }
-}

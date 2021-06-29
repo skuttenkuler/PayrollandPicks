@@ -1,0 +1,16 @@
+overwrite: true
+schema: "http://127.0.0.1:8000/graphql/"
+documents: "../frontend/graphql/*.ts"
+
+generates:
+  generated/index.tsx:
+
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+    plugins:
+      - add:
+          content: '/* tslint:disable */'  
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"

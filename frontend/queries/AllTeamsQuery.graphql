@@ -1,9 +1,0 @@
-query getTeams {
-  teams{
-    teamId
-    teamName
-    teamCity
-    teamLogo
-  }
-}
-
