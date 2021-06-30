@@ -16,6 +16,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
+var nf = new Intl.NumberFormat()
+
 const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
@@ -39,6 +41,9 @@ const StyledTableRow = withStyles((theme: Theme) =>
 )(TableRow);
 const useStyles = makeStyles({
   table: {
+    position:"absolute",
+    top: 100,
+    maxWidth:1200,
     minWidth: 650,
   },
 });
@@ -75,21 +80,20 @@ function Home() {
         </TableHead>
         <TableBody>
           {teams.map((team) => (
-            <Link className={styles.tableLink} href="/teams/[id]" as={`/teams/${team.teamId}`}>
               <StyledTableRow key={team.teamId}>
-                <StyledTableCell component="th" scope="row">
-                  <img className={styles.tableImage} src={team.teamLogo} alt="logo"/>
-                    
-                </StyledTableCell>
+                <Link className={styles.tableLink} href="/teams/[id]" as={`/teams/${team.teamId}`}>
+                  <StyledTableCell component="th" scope="row">
+                    <img className={styles.tableImage} src={team.teamLogo} alt="logo"/>     
+                  </StyledTableCell>
+                </Link>
                 <StyledTableCell align="right">{team.teamCity} {team.teamName}</StyledTableCell>
-                <StyledTableCell align="right">{team.totalCap}</StyledTableCell>
-                <StyledTableCell align="right">{team.activeRosterCap}</StyledTableCell>
-                <StyledTableCell align="right">{team.deadCap}</StyledTableCell>
-                <StyledTableCell align="right">{team.capHold}</StyledTableCell>
-                <StyledTableCell align="right">{team.capMaxSpace}</StyledTableCell>
-                <StyledTableCell align="right">{team.teamDivision}</StyledTableCell>
+                <StyledTableCell align="right">{team.totalCap.toLocaleString()}</StyledTableCell>
+                <StyledTableCell align="right">{team.activeRosterCap.toLocaleString()}</StyledTableCell>
+                <StyledTableCell align="right">{team.deadCap ? team.deadCap.toLocaleString(): ""}</StyledTableCell>
+                <StyledTableCell align="right">{team.capHold ? team.capHold.toLocaleString(): ""}</StyledTableCell>
+                <StyledTableCell align="right">{team.capMaxSpace.toLocaleString()}</StyledTableCell>
+                <StyledTableCell align="right">{team.teamDivision.toLocaleString()}</StyledTableCell>
               </StyledTableRow>
-            </Link>
           ))}
         </TableBody>
       </Table>
