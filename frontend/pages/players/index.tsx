@@ -11,7 +11,6 @@ function Players() {
     data,"players",[]
   ) as GetPlayersQuery["players"];
 
-  // if all good return data
   return (
     <div className={styles.container}>
       <h1>Players</h1>

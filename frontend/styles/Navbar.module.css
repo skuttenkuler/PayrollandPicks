@@ -1,4 +1,13 @@
 .navBar{
-    color:black;
-    font-size:20rem;
+    width:100%;
+    color:purple;
+    display: flex;
+    position: absolute;
+    top: 0;
+    background-color: darkgrey;
+}
+.navBar a{
+    padding-right:30px;
+    font-size:30px;
+    text-decoration: none;
 }

@@ -2,9 +2,6 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/teams/[id]": "pages/teams/[id].js",
-  "/teams": "pages/teams.js",
   "/": "pages/index.js",
-  "/players": "pages/players.js",
-  "/players/[id]": "pages/players/[id].js"
+  "/teams/[id]": "pages/teams/[id].js"
 }

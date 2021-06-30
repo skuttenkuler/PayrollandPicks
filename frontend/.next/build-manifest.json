@@ -29,21 +29,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/players": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/players.js"
-    ],
-    "/players/[id]": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/players/[id].js"
-    ],
-    "/teams": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/teams.js"
-    ],
     "/teams/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
