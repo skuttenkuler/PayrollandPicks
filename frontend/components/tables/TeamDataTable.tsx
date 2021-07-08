@@ -1,5 +1,5 @@
+import {useState} from 'react';
 import {Table} from 'react-bootstrap';
-
 
 const columns = [
     {
@@ -38,27 +38,31 @@ const columns = [
 
 
 export default function TeamDataTable(teamData: any) {
+    console.log()
     return(
     <Table striped bordered hover>
         <thead>
             <tr>
+                
             {columns.map((col) => (
                     <th>{col.Header}</th>
                 ))}
             </tr>
-            <tbody>
-                {/* { teamData.teams.map((team) => (
-                    <tr key={team.teamId}>
-                        <td>{team.totalCap.toLocaleString()}</td>
-                        <td>{team.activeRosterCap.toLocaleString()}</td>
-                        <td>{team.deadCap ? team.deadCap.toLocaleString(): ""}</td>
-                        <td>{team.capHold ? team.capHold.toLocaleString(): ""}</td>
-                        <td>{team.capMaxSpace.toLocaleString()}</td>
-                        <td>{team.teamDivision.toLocaleString()}</td>
-                    </tr>
-                ))} */}
-            </tbody>
         </thead>
+            <tbody>
+                    <tr key={teamData.teamData.team.teamId}>
+                        <td>{teamData.teamData.team.teamName}</td>
+                        <td>{teamData.teamData.team.teamCity}</td>
+                        <td>{teamData.teamData.team.teamDivision}</td>
+                        <td>{teamData.teamData.team.totalCap.toLocaleString()}</td>
+                        <td>{teamData.teamData.team.activeRosterCap.toLocaleString()}</td>
+                        <td>{teamData.teamData.team.deadCap ? teamData.teamData.team.deadCap.toLocaleString(): ""}</td>
+                        <td>{teamData.teamData.team.capHold ? teamData.teamData.team.capHold.toLocaleString(): ""}</td>
+                        <td>{teamData.teamData.team.capMaxSpace.toLocaleString()}</td>
+                        
+                    </tr>
+            </tbody>
+        
     </Table>
     )
 }
