@@ -2,7 +2,8 @@ import { get } from 'lodash'
 import { getDataFromTree } from '@apollo/client/react/ssr'
 import withApollo from '../../lib/withApollo'
 import { useGetSingleTeamQuery } from '../../generated'
-import TeamDataTable from '../../components/tables/TeamDataTable';
+//import TeamDataTable from '../../components/tables/TeamDataTable';
+import TeamCard from '../../components/cards/TeamCard';
 
 function SingleTeamPage({ query }) {
     const id  = get(query, "id");
@@ -14,7 +15,8 @@ function SingleTeamPage({ query }) {
     });
 
     return (
-        <TeamDataTable teamData={data} />
+        <TeamCard teamData={data}/>
+        
     )
 }
 
