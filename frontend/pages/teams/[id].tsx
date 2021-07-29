@@ -6,17 +6,25 @@ import { useGetSingleTeamQuery } from '../../generated'
 import TeamCard from '../../components/cards/TeamCard';
 
 function SingleTeamPage({ query }) {
-    const id  = get(query, "id");
-
-    const { data } = useGetSingleTeamQuery({
+    console.log(query)
+    let id  = get(query, "id");
+    console.log(id)
+    const { loading, error, data } = useGetSingleTeamQuery({
+        
         variables: {
-            id,
+            id: id,
         },
     });
-
+    if(loading){
+        return "loading"
+    }
+    if(error){
+        console.log(error.message)
+    }
+        console.log(data)
+    
     return (
-        <TeamCard teamData={data}/>
-        
+        <TeamCard team={data}/>
     )
 }
 

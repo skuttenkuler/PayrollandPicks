@@ -20,8 +20,11 @@
 }
 .cardRight li{
     list-style: none;
-    display: flex;
     color: white;
+}
+.cardRight ul{
+    position: relative;
+    top:25%;
 }
 .cardHeaders{
     display: inline-block;
@@ -29,6 +32,6 @@
 
 }
 .cardData{
-    display: inline-block;
+    
     width:25%;
 }

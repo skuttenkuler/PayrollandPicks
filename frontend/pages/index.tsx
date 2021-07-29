@@ -49,7 +49,7 @@ const useStyles = makeStyles({
 });
 
 function Home() {
-  const { data } = useGetTeamsQuery();
+  const {data}  = useGetTeamsQuery();
   
   const teams = get(
     data,"teams",[]
